@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+			var carId='1G1JC124Y3Y500002';
+			var companyId='CarScannerDemo';
+			
+            document.addEventListener("DOMContentLoaded", () => {
+                const button = document.querySelector("#openViewerButton");
+                const onDialogClose = () => {
+                    console.log("Dialog has been closed")
+                }
+
+				vumoViewer.checkIfCarExists({
+                    companyId: companyId,
+                    carId: carId,
+                })
+                .then((isExist) => {
+                    if (isExist) {
+						button.style.display='block';
+                        button.addEventListener('click', () => {
+							vumoViewer.createAsDialog({
+								companyId: companyId,
+								carId: carId ,
+								markerVisible: true,
+								title: 'CarScannerDemo',
+								description: 'Demo, You can change this text',
+								closeOnBackdropClick: false,
+							}, onDialogClose);
+						});
+						
+                    } 
+                })
+                .catch(console.error);
+				
+               
+            })
+        </script>
+    </head>
+    <body>
+        <button id="openViewerButton" style="display:none">Open Vumo Viewer</button>
+
+        <script src="https://scripts.viewer.vumo.ai/vumo-viewer.js"></script> <!-- import script -->
+    </body>
+</html>

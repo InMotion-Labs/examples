@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #box {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100vh;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+				var carId='1G1JC124Y3Y500002';
+				var companyId='CarScannerDemo';
+				
+				vumoViewer.checkIfCarExists({
+                    companyId: companyId,
+                    carId: carId,
+                })
+                .then((isExist) => {
+                    if (isExist) {
+						
+                        vumoViewer.createAsElement({
+						
+						container: 'box',
+						companyId: companyId,
+						carId: carId,
+						markerVisible: false,
+						title: 'Betten Baker'
+					});
+                    } else {
+						document.getElementById("box").innerHTML='Car not found';
+                    }
+                })
+                .catch(console.error);
+				
+               
+            });
+        </script>
+    </head>
+    <body>
+	
+        <div id="box">
+        </div>
+
+        <script src="https://scripts.viewer.vumo.ai/vumo-viewer.js"></script> <!-- import script -->
+    </body>
+</html>
